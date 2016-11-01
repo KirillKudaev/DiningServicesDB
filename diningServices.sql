@@ -80,10 +80,20 @@ CREATE TABLE `Menu` (
    `dishId` INT(11) NOT NULL,
    `operationHoursId` INT(11) NOT NULL,
    `date` DATE,
-   CONSTRAINT `FKMenu_dishId` FOREIGN KEY (`dishId`)
-      REFERENCES `Dish` (`id`),
+	PRIMARY KEY (`id`),
    CONSTRAINT `FKMenu_operationHoursId` FOREIGN KEY (`operationHoursId`)
       REFERENCES `OperationHours` (`id`)
+);
+
+
+CREATE TABLE `DishXMenu` (
+	`dishId` INT(11) NOT NULL,
+	`menuId` INT(11) NOT NULL,
+
+   CONSTRAINT `DishXMenu_dishId` FOREIGN KEY (`dishId`)
+      REFERENCES `Dish` (`id`),
+   CONSTRAINT `DishXMenu_menuId` FOREIGN KEY (`menuId`)
+      REFERENCES `Menu` (`id`)
 );
 
 CREATE TABLE `Rating` (
