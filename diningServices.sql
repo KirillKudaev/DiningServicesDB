@@ -75,6 +75,17 @@ CREATE TABLE `Dish` (
       REFERENCES `FoodType` (`id`)
 );
 
+CREATE TABLE `Menu` (
+   `id` INT(11) NOT NULL,
+   `dishId` INT(11) NOT NULL,
+   `operationHoursId` INT(11) NOT NULL,
+   `date` DATE,
+   CONSTRAINT `FKMenu_dishId` FOREIGN KEY (`dishId`)
+      REFERENCES `Dish` (`id`),
+   CONSTRAINT `FKMenu_operationHoursId` FOREIGN KEY (`operationHoursId`)
+      REFERENCES `OperationHours` (`id`)
+);
+
 CREATE TABLE `Rating` (
    `userId` INT(11),
    `dishId` INT(11),
