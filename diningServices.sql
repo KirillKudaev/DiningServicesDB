@@ -37,8 +37,8 @@ CREATE TABLE `Location` (
    `name` ENUM('Breakfast','Lunch','Dinner') NOT NULL,
    `timeOpens` TIME,
    `timeCloses` TIME,
-   `institutionID` INT(11) NOT NULL,
-   CONSTRAINT `FKOperationHours_institutionID` FOREIGN KEY (`institutionID`)
+   `institutionId` INT(11),
+   CONSTRAINT `FKOperationHours_institutionId` FOREIGN KEY (`institutionId`)
       REFERENCES `Institution` (`id`),
    PRIMARY KEY (`id`)
 );
