@@ -8,7 +8,6 @@
 - User may look up the times the dining room or pub opens and closes
 - User may check in to the dining room or pub
 - User remains checked in until the user checks out or 1 hour has elapsed since the check in
-- User has the option to indicate that he or she can sponsor a meal
 - User can rate and comment about a certain dish
 
 ### Version 2 Requirements
@@ -21,3 +20,4 @@
 - When user’s favorite dishes are being served
 - If someone the user is following has checked in at either the pub or dining room
 - If a meal sponsor has checked in to either the pub or dining room
+- User has the option to indicate that he or she can sponsor a meal
