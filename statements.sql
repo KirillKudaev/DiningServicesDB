@@ -1,18 +1,3 @@
-/*
-* 1.
-* 2 list all ratings for a certain dish on a certain day
-* 3 check which dishes are vegitarian on a certain day
-* 4 display all dishes that ever received a score under 2
-* 5 display when dining room is open for lunch on saturday
-* 6 display how late the grill is open at the pub on Friday
-* 7 display the menu for an upcoming meal on certain date
-* 8 display all comments about all dishes for a certain meal
-* 9 show all comments made on a certain day
-* 10 display all comments by a certain user
-* 11 display average rating for vegan dishes
-* 12 display pub hours for next week
-*/
-
 /*1. See who is currently checked in at the pub
 * People who have checked in will be deleted from
 * the database after one hour. So, anyone in the table
