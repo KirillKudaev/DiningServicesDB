@@ -57,7 +57,7 @@ where i.name = "Pub Grill" and oh.name = "Dinner" and dayOfWeek = "Friday";
 /*7. Display the menu for a Breakfast on certain date*/
 
 select d.name from Dish d join DishXMenu dxm on d.id = dishId
-join Menu m on m.id = menuId 
+join Menu m on m.id = menuId
 join OperationHours oh on oh.id = operationHoursId
 where oh.name = "Breakfast" and date = "2017-02-02";
 
@@ -67,6 +67,21 @@ select d.name, comment from Rating r join Dish d on r.dishId = d.id
 join DishXMenu dxm on d.id = dxm.dishId
 join Menu m on menuId = m.id
 where m.id = 1 order by d.id, r.date;
+
+/* 9. Show all comments made on dishes about a lunch meal */
+select d.name, comment from Rating r
+join Dish d on d.id = r.dishId
+join DishXMenu dxm on dxm.dishId = d.id
+join Menu m on m.id = dxm.menuId
+join OperationHours oh on oh.id = m.operationHoursId
+where oh.name = "Lunch"
+order by d.name, r.date;
+
+/* 10. Display all comments by a certain user */
+select u.id, u.firstName, u.lastName, r.comment from User u
+join Rating r on r.userId = u.id
+where u.id = 2
+order by r.date;
 
 /*11. Display average rating for vegan dishes*/
 select avg(score) as 'Average Rating' from Rating r
