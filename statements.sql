@@ -43,30 +43,15 @@ join Rating r on r.dishId = d.id
 where r.score <= 2
 order by d.name;
 
-/*5. Display when dining room is open for lunch on saturday*/
 
-select timeOpens, timeCloses from Institution i join OperationHours oh on i.id = institutionId
-where i.name = "Dining Room" and oh.name = "Lunch" and dayOfWeek = "Saturday";
 
-/*6. Display how late the grill is open at the pub on Friday*/
-
-select timeOpens, timeCloses from Institution i join OperationHours oh on i.id = institutionId
-where i.name = "Pub Grill" and oh.name = "Dinner" and dayOfWeek = "Friday";
-
-/*8. Display all comments about all dishes for a certain meal*/
-
-select dish, comment from Rating r join Dish d on r.dishId = d.id
-join DishXMenu dxm on d.id = dxm.dishId
-join Menu m on menuId = m.id
-where m.id = 1 order by dish;
-
-/*11. Display average rating for vegan dishes*/
+/*11. display average rating for vegan dishes*/
 select avg(score) as 'Average Rating' from Rating r
 join Dish d on r.dishId = d.id
 join FoodType f on f.id = d.FoodTypeId
 where f.type = 'Vegitarian';
 
-/*12. Display pub hours for Friday and Saturday
+/*12. display pub hours for Friday and Saturday
 * Overall pub hours doesn't include pub grill
 */
 select dayOfWeek, timeOpens, timeCloses from OperationHours o
