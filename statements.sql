@@ -1,11 +1,12 @@
-/*1. See who is currently checked in at the pub
-* People who have checked in will be deleted from
+/*1. See who is currently checked in at the pub and is a meal sponsor
+* (People who have checked in will be deleted from
 * the database after one hour. So, anyone in the table
-* will be checked in.
+* will be checked in)
 */
 select firstName, lastName from User u
-where u.id in (select userId from CheckIn
-  where locationId = 2)
+where u.id in (select userId from CheckIn c
+  join Location l on l.id = c.locationId
+  where name = "Pub" and sponsor = 1)
 order by lastName, firstName;
 
 /*2. List all ratings for a certain dish on a certain day

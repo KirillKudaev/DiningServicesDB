@@ -48,6 +48,7 @@ CREATE TABLE `CheckIn` (
    `locationId` INT(11),
    `userId` INT(11),
    `comment` VARCHAR(255) DEFAULT NULL,
+   `sponsor` TINYINT(1),
    `date` DATE,
    PRIMARY KEY (`id`),
    CONSTRAINT `FKCheckIn_userId` FOREIGN KEY (`userId`)
