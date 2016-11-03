@@ -54,6 +54,13 @@ where i.name = "Dining Room" and oh.name = "Lunch" and dayOfWeek = "Saturday";
 select timeOpens, timeCloses from Institution i join OperationHours oh on i.id = institutionId
 where i.name = "Pub Grill" and oh.name = "Dinner" and dayOfWeek = "Friday";
 
+/*7. Display the menu for a Breakfast on certain date*/
+
+select d.name from Dish d join DishXMenu dxm on d.id = dishId
+join Menu m on m.id = menuId 
+join OperationHours oh on oh.id = operationHoursId
+where oh.name = "Breakfast" and date = "2017-02-02";
+
 /*8. Display all comments about all dishes for a certain meal*/
 
 select d.name, comment from Rating r join Dish d on r.dishId = d.id
