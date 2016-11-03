@@ -33,7 +33,8 @@ order by r.score;
 
 /*3. List all vegitarian dishes on a certain day*/
 select d.name from Dish d
-join Menu m on m.dishId = d.id
+join DishXMenu dxm on dxm.dishId = d.id
+join Menu m on dxm.menuId = m.id
 where m.date = '2016-10-1' and d.FoodTypeId = 2
 order by d.name;
 
@@ -55,10 +56,10 @@ where i.name = "Pub Grill" and oh.name = "Dinner" and dayOfWeek = "Friday";
 
 /*8. Display all comments about all dishes for a certain meal*/
 
-select dish, comment from Rating r join Dish d on r.dishId = d.id
+select d.name, comment from Rating r join Dish d on r.dishId = d.id
 join DishXMenu dxm on d.id = dxm.dishId
 join Menu m on menuId = m.id
-where m.id = 1 order by dish;
+where m.id = 1 order by d.id, r.date;
 
 /*11. Display average rating for vegan dishes*/
 select avg(score) as 'Average Rating' from Rating r
