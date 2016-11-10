@@ -1,5 +1,3 @@
-package com.cstaley.dbcourse.jdbc;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
