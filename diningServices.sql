@@ -6,14 +6,14 @@ USE DiningServices;
 
 CREATE TABLE `User` (
    `id` INT(11) NOT NULL AUTO_INCREMENT,
-   `lastName` VARCHAR(30) DEFAULT NULL,
-   `firstName` VARCHAR(30) DEFAULT NULL,
-   `middleName` VARCHAR(30) DEFAULT NULL,
+   `lastName` VARCHAR(35) DEFAULT NULL,
+   `firstName` VARCHAR(35) DEFAULT NULL,
+   `middleName` VARCHAR(35) DEFAULT NULL,
    `fbId` INT(11) NOT NULL,
    `gender` CHAR(1) NOT NULL,
-   `password` VARCHAR(30) NOT NULL,
+   `password` VARCHAR(255) NOT NULL,
    `firstSignIn` DATE,
-   `email` VARCHAR(30) DEFAULT NULL,
+   `email` VARCHAR(70) DEFAULT NULL,
    `role` TINYINT(1) NOT NULL,
    /*`image`*/
    PRIMARY KEY (`id`)
@@ -59,7 +59,7 @@ CREATE TABLE `CheckIn` (
 
 CREATE TABLE `FoodType` (
    `id` INT(11) NOT NULL AUTO_INCREMENT,
-   `type` VARCHAR(30) DEFAULT NULL,
+   `type` VARCHAR(20) NOT NULL,
    PRIMARY KEY (`id`)
 );
 
@@ -67,7 +67,7 @@ CREATE TABLE `Dish` (
    `id` INT(11) NOT NULL AUTO_INCREMENT,
    `foodTypeId` INT(11),
    `institutionId` INT(11),
-   `name` VARCHAR(30) DEFAULT NULL,
+   `name` VARCHAR(50) NOT NULL,
    `price` DECIMAL(6,2),
    PRIMARY KEY (`id`),
    CONSTRAINT `FKDish_Institution` FOREIGN KEY (`institutionId`)
@@ -78,7 +78,6 @@ CREATE TABLE `Dish` (
 
 CREATE TABLE `Menu` (
    `id` INT(11) NOT NULL,
-   `dishId` INT(11) NOT NULL,
    `operationHoursId` INT(11) NOT NULL,
    `date` DATE,
 	PRIMARY KEY (`id`),
@@ -90,7 +89,6 @@ CREATE TABLE `Menu` (
 CREATE TABLE `DishXMenu` (
 	`dishId` INT(11) NOT NULL,
 	`menuId` INT(11) NOT NULL,
-
    CONSTRAINT `DishXMenu_dishId` FOREIGN KEY (`dishId`)
       REFERENCES `Dish` (`id`),
    CONSTRAINT `DishXMenu_menuId` FOREIGN KEY (`menuId`)
@@ -120,9 +118,8 @@ INSERT INTO User VALUES
 
 INSERT INTO FoodType VALUES
   (1, 'Omnivore'),
-  (2, 'Vegitarian'),
+  (2, 'Vegetarian'),
   (3, 'Vegan');
-
 
 
 INSERT INTO `Institution` VALUES
