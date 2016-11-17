@@ -77,7 +77,7 @@ CREATE TABLE `Dish` (
 );
 
 CREATE TABLE `Menu` (
-   `id` INT(11) NOT NULL,
+   `id` INT(11) NOT NULL AUTO_INCREMENT,
    `operationHoursId` INT(11) NOT NULL,
    `date` DATE,
 	PRIMARY KEY (`id`),
