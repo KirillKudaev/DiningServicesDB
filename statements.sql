@@ -73,7 +73,7 @@ order by r.date;
 select avg(score) as 'Average Rating' from Rating r
 join Dish d on r.dishId = d.id
 join FoodType f on f.id = d.FoodTypeId
-where f.type = 'Vegetarian';
+where f.type = 'Vegitarian';
 
 /*12. Display pub hours for Friday and Saturday
 * Overall pub hours doesn't include pub grill
