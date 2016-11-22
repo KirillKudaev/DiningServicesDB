@@ -13,11 +13,11 @@ order by lastName, firstName;
 */
 select d.name, r.score from Rating r
 join Dish d on d.id = r.dishId
-where d.name = "Salmon"
+where d.name = "Dish 1"
   and date = '2016-10-01'
 order by r.score;
 
-/*3. List all vegitarian dishes on a certain day*/
+/*3. List all vegetarian dishes on a certain day*/
 select d.name from Dish d
 join DishXMenu dxm on dxm.dishId = d.id
 join Menu m on dxm.menuId = m.id
@@ -73,7 +73,7 @@ order by r.date;
 select avg(score) as 'Average Rating' from Rating r
 join Dish d on r.dishId = d.id
 join FoodType f on f.id = d.FoodTypeId
-where f.type = 'Vegitarian';
+where f.type = 'Vegetarian';
 
 /*12. Display pub hours for Friday and Saturday
 * Overall pub hours doesn't include pub grill
