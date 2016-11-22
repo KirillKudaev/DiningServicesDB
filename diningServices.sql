@@ -219,9 +219,5 @@ INSERT INTO `OperationHours` VALUES
 	(81,'Sunday', 'Dinner', '17:30', '19:30', 1),
 	(82,'Sunday', 'Dinner', '18:30', '9:00', 2),
 	(83,'Sunday', 'Dinner', '19:30', '23:59', 3),
-	(84,'Sunday', 'Dinner', '19:30', '23:30', 4),
-	
-	
-	
-	;
+	(84,'Sunday', 'Dinner', '19:30', '23:30', 4);
 
