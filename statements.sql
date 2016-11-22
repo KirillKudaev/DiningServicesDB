@@ -21,7 +21,7 @@ order by r.score;
 select d.name from Dish d
 join DishXMenu dxm on dxm.dishId = d.id
 join Menu m on dxm.menuId = m.id
-where m.date = '2016-10-1' and d.FoodTypeId = 2
+where m.date = '2016-10-21' and d.FoodTypeId = 2
 order by d.name;
 
 /*4. display all dishes that ever received a score 2 under*/
@@ -73,7 +73,7 @@ order by r.date;
 select avg(score) as 'Average Rating' from Rating r
 join Dish d on r.dishId = d.id
 join FoodType f on f.id = d.FoodTypeId
-where f.type = 'Vegitarian';
+where f.type = 'Vegetarian';
 
 /*12. Display pub hours for Friday and Saturday
 * Overall pub hours doesn't include pub grill
