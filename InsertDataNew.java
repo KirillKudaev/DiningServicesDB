@@ -264,6 +264,113 @@ public class InsertData {
         }
     }
 
+    static public void handInserts(Connection cnc) throws SQLException {
+        ResultSet rst = null;
+        PreparedStatement pst = null;
+        String stmt;
+        List<Integer> dishList = new ArrayList<>();
+        List<Integer> dishList2 = new ArrayList<>();
+        List<Integer> menuList = new ArrayList<>();
+
+        stmt = "INSERT INTO Dish (foodTypeId, institutionId, name, price) VALUES" +
+                " (1, 1, 'Salmon', 5.50)," +
+                " (2, 1, 'Vegie 1', 5.50)," +
+                " (2, 1, 'Vegie 2', 5.50)," +
+                " (2, 1, 'Vegie 3', 5.50)";
+
+        pst = cnc.prepareStatement(stmt);
+        pst.executeUpdate();
+
+        stmt = "INSERT INTO Menu (operationHoursId, date) VALUES" +
+                " (1, '2016-10-21')," +
+                " (1, '2017-02-02')";
+
+        pst = cnc.prepareStatement(stmt);
+        pst.executeUpdate();
+
+        stmt = "SELECT id FROM Dish " +
+                "WHERE name = 'Vegie 1' " +
+                "OR name = 'Vegie 2' " +
+                "OR name = 'Vegie 3'";
+
+        pst = cnc.prepareStatement(stmt);
+        rst = pst.executeQuery();
+
+        while (rst.next()) {
+            dishList.add(rst.getInt(1));
+           // System.out.println("dish id for vegies" + rst.getInt(1));
+        }
+
+        stmt = "SELECT id FROM Menu " +
+                "WHERE date = '2016-10-21' " +
+                "OR date = '2017-02-02'";
+
+        pst = cnc.prepareStatement(stmt);
+        rst = pst.executeQuery();
+
+        while (rst.next()) {
+            menuList.add(rst.getInt(1));
+            //System.out.println("menu ids " + rst.getInt(1));
+        }
+
+        stmt = "INSERT INTO DishXMenu (dishId, menuId) VALUES ";
+        for (Integer i: dishList) {
+            for (Integer j : menuList) {
+                stmt += "(" + i + ", " + j + "), ";
+            }
+        }
+
+        //Remove final comma from string
+        stmt = stmt.substring(0, stmt.length() - 2);
+
+        pst = cnc.prepareStatement(stmt);
+        pst.executeUpdate();
+
+        stmt = "SELECT id FROM Dish " +
+                "WHERE name = 'Salmon'";
+
+        pst = cnc.prepareStatement(stmt);
+        rst = pst.executeQuery();
+
+        while (rst.next()) {
+            dishList.add(rst.getInt(1));
+            //System.out.println("menu ids " + rst.getInt(1));
+        }
+
+        stmt = "SELECT d.id from Dish d " +
+                "join DishXMenu dxm on dxm.dishId = d.id " +
+                "where dxm.menuId = 1";
+
+        pst = cnc.prepareStatement(stmt);
+        rst = pst.executeQuery();
+
+        while (rst.next()) {
+            dishList2.add(rst.getInt(1));
+            //System.out.println("menu ids " + rst.getInt(1));
+        }
+
+        stmt = "INSERT INTO Rating (userId, dishId, score, comment, date) VALUES ";
+
+        int x = 1;
+        for (Integer i: dishList) {
+            stmt += "(" + x + ", " + i + ", 3, 'It was OK', '2016-10-01'), ";
+            x++;
+        }
+
+        x = 1;
+        for (Integer i: dishList2) {
+            stmt += "(" + x + ", " + i + ", 2, 'Not very good!', now()), ";
+            x++;
+        }
+
+        //Remove final comma from string
+        stmt = stmt.substring(0, stmt.length() - 2);
+
+        pst = cnc.prepareStatement(stmt);
+        pst.executeUpdate();
+
+    }
+
     static void closeEm(Object... toClose) {
         for (Object obj: toClose)
             if (obj != null)
@@ -293,7 +400,8 @@ public class InsertData {
             makeCheckins(cnc, numberOfCheckins);
             System.out.println("Inserting Ratings...");
             makeRatings(cnc, numberOfRatings);
-
+            System.out.println("Executing Hand Inserts...");
+            handInserts(cnc);
 
         } catch (SQLException err) {
             System.out.println("main: ");
