@@ -13,7 +13,7 @@ order by lastName, firstName;
 */
 select d.name, r.score from Rating r
 join Dish d on d.id = r.dishId
-where d.name = "Dish 1"
+where d.name = "Salmon"
   and date = '2016-10-01'
 order by r.score;
 
@@ -45,7 +45,15 @@ where i.name = "Pub Grill" and oh.name = "Dinner" and dayOfWeek = "Friday";
 select d.name from Dish d join DishXMenu dxm on d.id = dishId
 join Menu m on m.id = menuId
 join OperationHours oh on oh.id = operationHoursId
-where oh.name = "Breakfast" and date = "2017-02-02";
+where oh.name = "Breakfast" and m.date = "2017-02-02";
+
+/* Possible Change? - Adds institution where menu items are being served
+select d.name, i.name from Dish d join DishXMenu dxm on d.id = dishId
+join Menu m on m.id = menuId
+join OperationHours oh on oh.id = operationHoursId
+join Institution i on i.id = d.institutionId
+where oh.name = "Breakfast" and m.date = "2017-02-02";
+*/
 
 /*8. Display all comments about all dishes for a certain meal*/
 
@@ -63,7 +71,7 @@ join OperationHours oh on oh.id = m.operationHoursId
 where oh.name = "Lunch"
 order by d.name, r.date;
 
-/* 10. Display all comments by a certain user */
+/* 10. Display all comments by a certaino user */
 select u.id, u.firstName, u.lastName, r.comment from User u
 join Rating r on r.userId = u.id
 where u.id = 2
@@ -73,7 +81,7 @@ order by r.date;
 select avg(score) as 'Average Rating' from Rating r
 join Dish d on r.dishId = d.id
 join FoodType f on f.id = d.FoodTypeId
-where f.type = 'Vegetarian';
+where f.type = 'Vegan';
 
 /*12. Display pub hours for Friday and Saturday
 * Overall pub hours doesn't include pub grill
