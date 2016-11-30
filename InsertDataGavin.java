@@ -75,8 +75,6 @@ public class InsertData {
 
             makeDishes(cnc, numberOfDishes);
 
-
-
 //            ResultSet rst = null;
 //            PreparedStatement pst = null;
 //

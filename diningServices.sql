@@ -9,13 +9,12 @@ CREATE TABLE `User` (
    `lastName` VARCHAR(35) DEFAULT NULL,
    `firstName` VARCHAR(35) DEFAULT NULL,
    `middleName` VARCHAR(35) DEFAULT NULL,
-   `fbId` INT(11) NOT NULL,
-   `gender` CHAR(1) NOT NULL,
+   `fbId` INT(11) DEFAULT NULL,
+   `gender` CHAR(1) DEFAULT NULL,
    `password` VARCHAR(255) NOT NULL,
    `firstSignIn` DATE,
    `email` VARCHAR(70) DEFAULT NULL,
-   `role` TINYINT(1) NOT NULL,
-   /*`image`*/
+   `role` TINYINT NOT NULL,
    PRIMARY KEY (`id`)
 );
 
@@ -48,7 +47,7 @@ CREATE TABLE `CheckIn` (
    `locationId` INT(11),
    `userId` INT(11),
    `comment` VARCHAR(255) DEFAULT NULL,
-   `sponsor` TINYINT(1),
+   `sponsor` TINYINT,
    `date` DATE,
    PRIMARY KEY (`id`),
    CONSTRAINT `FKCheckIn_userId` FOREIGN KEY (`userId`)
@@ -98,7 +97,7 @@ CREATE TABLE `DishXMenu` (
 CREATE TABLE `Rating` (
    `userId` INT(11),
    `dishId` INT(11),
-   `score` TINYINT(11),
+   `score` TINYINT,
    `comment` VARCHAR(255) DEFAULT NULL,
    `date` DATE,
    CONSTRAINT `FKRating_userId` FOREIGN KEY (`userId`)
@@ -127,13 +126,6 @@ INSERT INTO `Institution` VALUES
    (2,'Dining Grill'),
    (3,'Pub'),
    (4,'Pub Grill');
-
-   
-/*INSERT INTO Dish VALUES
-  (1, 1, 1, 'Salmon', 5.50),
-  (2, 2, 1, 'Veggie Burger', 3.30),
-  (3, 1, 3, 'Vanilla Shake', 2.55);
-*/
 
 INSERT INTO `OperationHours` VALUES
 	(1,'Monday', 'Breakfast', '7:30', '9:30', 1),
@@ -220,4 +212,3 @@ INSERT INTO `OperationHours` VALUES
 	(82,'Sunday', 'Dinner', '18:30', '9:00', 2),
 	(83,'Sunday', 'Dinner', '19:30', '23:59', 3),
 	(84,'Sunday', 'Dinner', '19:30', '23:30', 4);
-
