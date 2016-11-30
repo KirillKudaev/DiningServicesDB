@@ -6,21 +6,21 @@ USE DiningServices;
 
 CREATE TABLE `User` (
    `id` INT(11) NOT NULL AUTO_INCREMENT,
-   `lastName` VARCHAR(35) DEFAULT NULL,
-   `firstName` VARCHAR(35) DEFAULT NULL,
+   `lastName` VARCHAR(35) NOT NULL,
+   `firstName` VARCHAR(35) NOT NULL,
    `middleName` VARCHAR(35) DEFAULT NULL,
    `fbId` INT(11) DEFAULT NULL,
    `gender` CHAR(1) DEFAULT NULL,
    `password` VARCHAR(255) NOT NULL,
-   `firstSignIn` DATE,
-   `email` VARCHAR(70) DEFAULT NULL,
+   `firstSignIn` DATE NOT NULL,
+   `email` VARCHAR(70) NOT NULL,
    `role` TINYINT NOT NULL,
    PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `Location` (
    `id` INT(11) NOT NULL,
-   `name` VARCHAR(15),
+   `name` VARCHAR(15) NOT NULL,
    PRIMARY KEY (`id`)
  );
 
@@ -34,9 +34,9 @@ CREATE TABLE `Location` (
    `id` INT(11) NOT NULL,
    `dayOfWeek` ENUM('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday') NOT NULL,
    `name` ENUM('Breakfast','Lunch','Dinner') NOT NULL,
-   `timeOpens` TIME,
-   `timeCloses` TIME,
-   `institutionId` INT(11),
+   `timeOpens` TIME NOT NULL,
+   `timeCloses` TIME NOT NULL,
+   `institutionId` INT(11) NOT NULL,
    CONSTRAINT `FKOperationHours_institutionId` FOREIGN KEY (`institutionId`)
       REFERENCES `Institution` (`id`),
    PRIMARY KEY (`id`)
@@ -44,11 +44,11 @@ CREATE TABLE `Location` (
 
 CREATE TABLE `CheckIn` (
    `id` INT(11) NOT NULL AUTO_INCREMENT,
-   `locationId` INT(11),
-   `userId` INT(11),
+   `locationId` INT(11) NOT NULL,
+   `userId` INT(11) NOT NULL,
    `comment` VARCHAR(255) DEFAULT NULL,
    `sponsor` TINYINT,
-   `date` DATE,
+   `date` DATE NOT NULL,
    PRIMARY KEY (`id`),
    CONSTRAINT `FKCheckIn_userId` FOREIGN KEY (`userId`)
       REFERENCES `User` (`id`),
@@ -64,10 +64,10 @@ CREATE TABLE `FoodType` (
 
 CREATE TABLE `Dish` (
    `id` INT(11) NOT NULL AUTO_INCREMENT,
-   `foodTypeId` INT(11),
-   `institutionId` INT(11),
+   `foodTypeId` INT(11) NOT NULL,
+   `institutionId` INT(11) NOT NULL,
    `name` VARCHAR(50) NOT NULL,
-   `price` DECIMAL(6,2),
+   `price` DECIMAL(6,2) NOT NULL,
    PRIMARY KEY (`id`),
    CONSTRAINT `FKDish_Institution` FOREIGN KEY (`institutionId`)
       REFERENCES `Institution` (`id`),
@@ -78,7 +78,7 @@ CREATE TABLE `Dish` (
 CREATE TABLE `Menu` (
    `id` INT(11) NOT NULL AUTO_INCREMENT,
    `operationHoursId` INT(11) NOT NULL,
-   `date` DATE,
+   `date` DATE NOT NULL,
 	PRIMARY KEY (`id`),
    CONSTRAINT `FKMenu_operationHoursId` FOREIGN KEY (`operationHoursId`)
       REFERENCES `OperationHours` (`id`)
@@ -95,9 +95,9 @@ CREATE TABLE `DishXMenu` (
 );
 
 CREATE TABLE `Rating` (
-   `userId` INT(11),
-   `dishId` INT(11),
-   `score` TINYINT,
+   `userId` INT(11) NOT NULL,
+   `dishId` INT(11) NOT NULL,
+   `score` TINYINT NOT NULL,
    `comment` VARCHAR(255) DEFAULT NULL,
    `date` DATE,
    CONSTRAINT `FKRating_userId` FOREIGN KEY (`userId`)
