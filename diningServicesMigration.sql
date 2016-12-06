@@ -67,9 +67,25 @@ MODIFY timeOpens TIME NOT NULL,
 MODIFY timecloses TIME NOT NULL,
 MODIFY institutionId INT NOT NULL;
 
+
+
 ALTER TABLE CheckIn
-MODIFY locationId INT NOT NULL,
-MODIFY userId INT NOT NULL,
+DROP FOREIGN KEY `FKCheckIn_locationId`;
+
+ALTER TABLE CheckIn
+MODIFY locationId INT NOT NULL;
+
+ALTER TABLE CheckIn
+ADD CONSTRAINT `FKCheckIn_locationId` FOREIGN KEY (locationId)
+   REFERENCES Location (id),
+DROP FOREIGN KEY `FKCheckIn_userId`;
+
+ALTER TABLE CheckIn
+MODIFY userId INT NOT NULL;
+
+ALTER TABLE CheckIn
+ADD CONSTRAINT `FKCheckIn_userId` FOREIGN KEY (userId)
+   REFERENCES User (id),
 MODIFY sponsor TINYINT NOT NULL,
 MODIFY `date` DATETIME NOT NULL;
 
@@ -87,3 +103,8 @@ MODIFY userId INT NOT NULL,
 MODIFY dishId INT NOT NULL,
 MODIFY score TINYINT NOT NULL,
 MODIFY `date` DATE NOT NULL;
+
+INSERT INTO `TimeType` VALUES
+   (1,'open'),
+   (2,'close'),
+   (3,'both');
