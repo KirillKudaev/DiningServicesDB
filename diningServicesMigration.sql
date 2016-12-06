@@ -108,3 +108,5 @@ INSERT INTO `TimeType` VALUES
    (1,'open'),
    (2,'close'),
    (3,'both');
+
+ALTER TABLE tbl ADD id INT PRIMARY KEY AUTO_INCREMENT;
