@@ -62,12 +62,18 @@ MODIFY email VARCHAR(70) NOT NULL;
 ALTER TABLE Location
 MODIFY name VARCHAR(30) NOT NULL;
 
+
+ALTER TABLE OperationHours
+DROP FOREIGN KEY `FKOperationHours_institutionId`;
+
 ALTER TABLE OperationHours
 MODIFY timeOpens TIME NOT NULL,
 MODIFY timecloses TIME NOT NULL,
 MODIFY institutionId INT NOT NULL;
 
-
+ALTER TABLE OperationHours
+ADD CONSTRAINT `FKOperationHours_institutionId` FOREIGN KEY (`institutionId`)
+   REFERENCES `Institution` (`id`);
 
 ALTER TABLE CheckIn
 DROP FOREIGN KEY `FKCheckIn_locationId`;
@@ -90,25 +96,46 @@ MODIFY sponsor TINYINT NOT NULL,
 MODIFY `date` DATETIME NOT NULL;
 
 ALTER TABLE Dish
+DROP FOREIGN KEY `FKDish_FoodType`,
+DROP FOREIGN KEY `FKDish_Institution`;
+
+ALTER TABLE Dish
 MODIFY foodTypeId INT NOT NULL,
 MODIFY institutionId INT NOT NULL,
 MODIFY price DECIMAL(6,2) NOT NULL;
+
+ALTER TABLE Dish
+ADD CONSTRAINT `FKDish_FoodType` FOREIGN KEY (`foodTypeId`)
+REFERENCES `FoodType` (`id`),
+ADD CONSTRAINT `FKDish_Institution` FOREIGN KEY (`institutionId`)
+REFERENCES `Institution` (`id`);
 
 ALTER TABLE Menu
 MODIFY `date` DATE NOT NULL;
 
 RENAME TABLE Rating TO DishRating;
+
+ALTER TABLE DishRating
+DROP FOREIGN KEY `FKRating_dishId`,
+DROP FOREIGN KEY `FKRating_userId`;
+
 ALTER TABLE DishRating
 MODIFY userId INT NOT NULL,
 MODIFY dishId INT NOT NULL,
 MODIFY score TINYINT NOT NULL,
 MODIFY `date` DATE NOT NULL;
 
+ALTER TABLE DishRating
+ADD CONSTRAINT `FKDishRating_dishId` FOREIGN KEY (`dishId`)
+REFERENCES `Dish` (`id`),
+ADD CONSTRAINT `FKDishRating_userId` FOREIGN KEY (`userId`)
+   REFERENCES `User` (`id`);
+
 INSERT INTO `TimeType` VALUES
    (1,'open'),
    (2,'close'),
    (3,'both');
 
-ALTER TABLE tbl ADD id INT PRIMARY KEY AUTO_INCREMENT;
+ALTER TABLE DishRating ADD id INT PRIMARY KEY AUTO_INCREMENT;
 
 ALTER TABLE User ADD CONSTRAINT UNIQUE (email);
