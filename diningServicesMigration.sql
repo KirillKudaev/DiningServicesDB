@@ -6,9 +6,9 @@ CREATE TABLE `Follower` (
    `followingId` INT NOT NULL,
    UNIQUE KEY (`followerId`, `followingId`),
    CONSTRAINT `FKFollower_followerId` FOREIGN KEY (`followerId`)
-      REFERENCES `User` (`id`),
+      REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
    CONSTRAINT `FKFollower_followingId` FOREIGN KEY (`followingId`)
-      REFERENCES `User` (`id`)
+      REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE `OverallRating` (
@@ -20,9 +20,9 @@ CREATE TABLE `OverallRating` (
    `comment` VARCHAR(255),
    UNIQUE KEY (`userId`, `menuId`),
    CONSTRAINT `FKOverallRating_userId` FOREIGN KEY (`userId`)
-      REFERENCES `User` (`id`),
-   CONSTRAINT `FKFollower_menuId` FOREIGN KEY (`menuId`)
-      REFERENCES `Menu` (`id`)
+      REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+   CONSTRAINT `FKOverallRating_menuId` FOREIGN KEY (`menuId`)
+      REFERENCES `Menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE `TimeType` (
@@ -36,7 +36,7 @@ CREATE TABLE `TimeType` (
    `OperationHourId` INT NOT NULL,
    `timeTypeId` INT NOT NULL,
    CONSTRAINT `FKMealTimeNotification_userId` FOREIGN KEY (`userId`)
-      REFERENCES `User` (`id`),
+      REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
    CONSTRAINT `FKMealTimeNotification_OperationHourId` FOREIGN KEY (`OperationHourId`)
          REFERENCES `OperationHours` (`id`),
    CONSTRAINT `FKMealTimeNotification_timeTypeId` FOREIGN KEY (`timeTypeId`)
@@ -47,9 +47,9 @@ CREATE TABLE `DishNotification` (
   `userId` INT NOT NULL,
   `dishId` INT NOT NULL,
   CONSTRAINT `FKDishNotification_userId` FOREIGN KEY (`userId`)
-        REFERENCES `User` (`id`),
+        REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FKDishNotification_dishId` FOREIGN KEY (`dishId`)
-     REFERENCES `Dish` (`id`)
+     REFERENCES `Dish` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 ALTER TABLE User
@@ -83,7 +83,7 @@ MODIFY locationId INT NOT NULL;
 
 ALTER TABLE CheckIn
 ADD CONSTRAINT `FKCheckIn_locationId` FOREIGN KEY (locationId)
-   REFERENCES Location (id),
+   REFERENCES Location (id) ON DELETE CASCADE ON UPDATE CASCADE,
 DROP FOREIGN KEY `FKCheckIn_userId`;
 
 ALTER TABLE CheckIn
@@ -91,7 +91,7 @@ MODIFY userId INT NOT NULL;
 
 ALTER TABLE CheckIn
 ADD CONSTRAINT `FKCheckIn_userId` FOREIGN KEY (userId)
-   REFERENCES User (id),
+   REFERENCES User (id) ON DELETE CASCADE ON UPDATE CASCADE,
 MODIFY sponsor TINYINT NOT NULL,
 MODIFY `date` DATETIME NOT NULL;
 
@@ -127,9 +127,9 @@ MODIFY `date` DATE NOT NULL;
 
 ALTER TABLE DishRating
 ADD CONSTRAINT `FKDishRating_dishId` FOREIGN KEY (`dishId`)
-REFERENCES `Dish` (`id`),
+REFERENCES `Dish` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `FKDishRating_userId` FOREIGN KEY (`userId`)
-   REFERENCES `User` (`id`);
+   REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 INSERT INTO `TimeType` VALUES
    (1,'open'),
